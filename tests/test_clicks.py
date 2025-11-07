@@ -1,7 +1,5 @@
 import pytest
 import allure
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from urls import URL_MAIN_PAGE, TRACK_PAGE_ENDPOINT
 from pages.main_page import MainPage
 
@@ -25,8 +23,6 @@ class TestClicks:
         main_page.click_yandex_logo()
         main_page.switch_to_new_tab()
         
-        search_button = main_page.wait.until(
-            EC.visibility_of_element_located((By.XPATH, "//button[text()='Найти']"))
-        )
-        
+        # Метод Page Object вместо прямого вызова wait.until
+        search_button = main_page.wait_for_dzen_search_button()
         assert search_button.is_displayed()

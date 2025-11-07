@@ -1,5 +1,6 @@
 import allure
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
+from selenium.webdriver.common.by import By
 from locators.main_page_locators import MainPageLocators
 from locators.general_locators import GeneralLocators
 from pages.base_page import BasePage
@@ -58,3 +59,8 @@ class MainPage(BasePage):
         except ElementClickInterceptedException:
             # Если не сработал обычный клик - используем JavaScript клик
             self.driver.execute_script("arguments[0].click();", button_element)
+
+    @allure.step('Дождаться кнопки поиска на Дзене')
+    def wait_for_dzen_search_button(self):
+        search_button_locator = (By.XPATH, "//button[text()='Найти']")
+        return self.wait_for_element(search_button_locator)
