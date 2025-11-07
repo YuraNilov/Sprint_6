@@ -18,6 +18,10 @@ class BasePage:
         self.wait.until(EC.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
+    @allure.step('Дождаться видимости элемента: {locator}')
+    def wait_for_element(self, locator):
+        return self.wait.until(EC.visibility_of_element_located(locator))
+
     @allure.step('Кликнуть на элемент: {locator}')
     def click_to_element(self, locator):
         self.wait.until(EC.element_to_be_clickable(locator))
